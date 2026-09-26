@@ -10,10 +10,10 @@ const { applyOperation } = require('../services/stockService');
 const PRODUCT_SELECT = `
   SELECT p.*, c.name AS category_name,
     COALESCE((SELECT SUM(quantity) FROM stock s WHERE s.product_id = p.id), 0) AS on_hand,
-    COALESCE((SELECT SUM(quantity) FROM stock s WHERE s.product_id = p.id), 0)
+    GREATEST(0, COALESCE((SELECT SUM(quantity) FROM stock s WHERE s.product_id = p.id), 0)
       - COALESCE((SELECT SUM(ol.quantity) FROM operation_lines ol
                   JOIN operations o ON o.id = ol.operation_id
-                  WHERE ol.product_id = p.id AND o.type = 'OUT' AND o.status IN ('waiting', 'ready')), 0)
+                  WHERE ol.product_id = p.id AND o.type = 'OUT' AND o.status IN ('waiting', 'ready')), 0))
       AS free_to_use
   FROM products p LEFT JOIN categories c ON c.id = p.category_id`;
 
