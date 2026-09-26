@@ -1,3 +1,0 @@
--- Owner: Devesh (kurozadev05) - backend
--- Demo data: warehouse WH, locations, sample products
--- TODO: not written yet
