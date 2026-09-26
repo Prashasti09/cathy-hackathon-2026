@@ -1,0 +1,3 @@
+-- Owner: Devesh (kurozadev05) - backend
+-- Creates all database tables
+-- TODO: not written yet
